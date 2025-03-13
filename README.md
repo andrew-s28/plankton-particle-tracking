@@ -10,7 +10,8 @@ The primary Lagrangian particle tracking simulations are ran using [plankton_tra
 
 2. `uv run --script scripts/plankton_tracking.py`
 
-      :warning: The [local install](scripts/parcels/) of [OceanParcels](https://github.com/OceanParcels/Parcels) is necessary to run this notebook since the fix implemented in [#1886](https://github.com/OceanParcels/Parcels/pull/1886) is not yet published on PyPi. If or when it is, this local install can be removed. Also, 
+      :warning: The [local install](scripts/parcels/) of [OceanParcels](https://github.com/OceanParcels/Parcels) is necessary to run this notebook since the fix implemented in [#1886](https://github.com/OceanParcels/Parcels/pull/1886) is not yet published on PyPi. If or when it is, this local install can be removed.
+      
       :warning: A C compiler is necessary to run this script. See below for install instructions.
 
 ## Installing a C Code Compiler
