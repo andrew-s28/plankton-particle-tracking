@@ -1,17 +1,19 @@
-# Scientific Analysis Code Template
+# Plankton Particle Tracking in the Northern California Current System
 
-This is the analysis code and datasets used for running Lagrangian particle tracking simulations in the Northern California Current System. 
+This is the analysis code and datasets used for running Lagrangian particle tracking simulations in the Northern California Current System, specifically targeted at locations coincident with plankton sampling lines such as the [Newport Hydrographic Line](https://hmsc.oregonstate.edu/lab/newport-hydrographic-line-ecosystem-studies). 
 
 ## Usage
 
-The primary Lagrangian particle tracking simulations are ran using [plankton_tracking.py](scripts/plankton_tracking.py). Run this script by:
+The primary Lagrangian particle tracking simulations are ran using [plankton_tracking.py](scripts/plankton_tracking.py). This script is designed to work with velocity fields from a [CROCO model](https://www.croco-ocean.org/). These model files are *far* too large to include in a repository. Set the path to model files [within the script](https://github.com/andrew-s28/plankton-particle-tracking/blob/main/scripts/plankton_tracking.py#L29) before running. 
+
+Run this script by:
 
 1. `git clone https://github.com/andrew-s28/plankton-particle-tracking.git`
 
 2. `uv run --script scripts/plankton_tracking.py`
 
       :warning: The [local install](scripts/parcels/) of [OceanParcels](https://github.com/OceanParcels/Parcels) is necessary to run this notebook since the fix implemented in [#1886](https://github.com/OceanParcels/Parcels/pull/1886) is not yet published on PyPi. If or when it is, this local install can be removed.
-      
+
       :warning: A C compiler is necessary to run this script. See below for install instructions.
 
 ## Installing a C Code Compiler
