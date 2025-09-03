@@ -178,3 +178,4 @@ pyrightconfig.json
 # OceanParcels output
 data/particle-tracks/*.zarr
 data/particle-tracks/*.nc
+*_scratch.ipynb
