@@ -3,7 +3,7 @@
 import argparse
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(description: str) -> argparse.Namespace:
     """Parse command line arguments for to control overwriting existing file behavior.
 
     Allows the selection of selection of overwriting behavior for output files.
@@ -16,7 +16,7 @@ def parse_args() -> argparse.Namespace:
 
     """
     parser = argparse.ArgumentParser(
-        description="Run forward altimeter tracking simulations.",
+        description=description,
     )
     parser.add_argument(
         "--force",

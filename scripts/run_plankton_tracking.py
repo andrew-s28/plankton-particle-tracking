@@ -32,7 +32,7 @@ if __name__ == "__main__":
         year_release=1997,
         max_age=timedelta(days=180),
     )
-    args = parse_args()
+    args = parse_args("Run OceanParcels plankton tracking simulations.")
     for year in years:
         for depth in depths:
             config.depth_release = depth

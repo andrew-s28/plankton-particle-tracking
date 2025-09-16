@@ -1,13 +1,56 @@
 """Utilities for running OceanParcels Lagrangian simulations.
 
-Currently holds functions for computing the land mask of an ocean model (i.e., where land is located),
-detecting coastal nodes near land, and creating an artificial displacement field to prevent stuck particles near land.
+Currently holds functions for opening OceanParcels outputs,
+computing the land mask of an ocean model (i.e., where land is located),
+detecting coastal nodes near land,
+and creating an artificial displacement field to prevent stuck particles near land.
 """
 
 from pathlib import Path
 
 import numpy as np
 import xarray as xr
+
+
+def open_parcels_output(
+    path: str | Path,
+    load: bool = True,  # noqa: FBT001,FBT002
+) -> xr.Dataset:
+    """Open a Zarr file containing OceanParcels (https://docs.oceanparcels.org/en/latest/index.html) output.
+
+    Automatically detects if the path is a single zarr file or if it
+    is a directory containing multiple Zarr files from MPI runs,
+    as detailed here: https://docs.oceanparcels.org/en/latest/examples/documentation_MPI.html.
+
+    Args:
+        path (str or Path): Path to the Zarr file or directory containing the Zarr files.
+        load (bool): If True, load the dataset into memory. Defaults to True.
+
+    Returns:
+        ds (xr.Dataset): The dataset containing the OceanParcels output.
+
+    Raises:
+        FileNotFoundError: If the specified path does not exist.
+
+    """
+    if isinstance(path, str):
+        path = Path(path)
+    if not path.exists():
+        msg = f"Path {path} does not exist."
+        raise FileNotFoundError(msg)
+    mpi_files = list(path.glob("proc*"))
+    if len(mpi_files) == 0:
+        ds = xr.open_zarr(path)
+    else:
+        ds = xr.concat(
+            [xr.open_zarr(f) for f in mpi_files],
+            dim="trajectory",
+            compat="no_conflicts",
+            coords="minimal",
+        )
+    if load:
+        ds.load()  # Load the dataset into memory
+    return ds
 
 
 def make_landmask(grid_file: str | Path) -> np.ndarray:

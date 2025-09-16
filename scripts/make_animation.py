@@ -164,7 +164,7 @@ if __name__ == "__main__":
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     save_dir = DATA_DIR / "animations"
     save_dir.mkdir(parents=True, exist_ok=True)
-    args = parse_args()
+    args = parse_args("Make animations for particle trajectories from the output of OceanParcels simulations.")
     with tqdm(desc="Making animations", total=len(years) * len(depths)) as pbar:
         for year in years:
             for depth in depths:
